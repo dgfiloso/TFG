@@ -1,0 +1,22 @@
+{
+  "name": "Servidor",
+  "version": "1.0.0",
+  "description": "Servidor para la gestión de los sockets",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "keywords": [],
+  "author": "David González Filoso <dgfiloso@b105.upm.es>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "fluent-ffmpeg": "^2.1.0",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "socket.io": "^1.7.2",
+    "socket.io-stream": "^0.9.1"
+  }
+}
