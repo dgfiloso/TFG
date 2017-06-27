@@ -14,23 +14,23 @@
 
 ##	Estructura
 	El sistema va a estar formado por dos partes:
-	+ Servidor node.js implementado en una Raspberry Pi 3 model B.
-	+ Cliente que puede ser transmisor o receptor. En esta versión el cliente será un ordenador.
+	* Servidor node.js implementado en una Raspberry Pi 3 model B.
+	* Cliente que puede ser transmisor o receptor. En esta versión el cliente será un ordenador.
 
 ##	Servidor
-	+ Instalar nodejs, nodejs-legacy y npm.
-	+ Descargar los archivos de la carpeta Servidor.
-	+ Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Servidor.
-	+ Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Servidor.
+	* Instalar nodejs, nodejs-legacy y npm.
+	* Descargar los archivos de la carpeta Servidor.
+	* Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Servidor.
+	* Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Servidor.
 
 ##	Cliente
-	+ Instalar nodejs, nodejs-legacy y npm.
-	+	Instalar pulseaudio, ffmpeg y libav-tools.
-	+ Descargar los archivos de la carpeta Cliente.
-	+ Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Cliente.
-	+ Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Cliente.
+	* Instalar nodejs, nodejs-legacy y npm.
+	*	Instalar pulseaudio, ffmpeg y libav-tools.
+	* Descargar los archivos de la carpeta Cliente.
+	* Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Cliente.
+	* Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Cliente.
 
 ##	Versiones
-	+	Versión 1.0:
+	*	Versión 1.0:
 
 		El servidor se ejecuta en una Raspberry Pi o en un ordenador. Los clientes son solo ordenadores, con el mismo código, que a través de una interfaz por línea de comandos se indica si eres transmisor o receptor.
