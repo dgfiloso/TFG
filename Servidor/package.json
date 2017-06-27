@@ -1,0 +1,15 @@
+{
+  "name": "websocket_server",
+  "version": "2.0.0",
+  "description": "Servidor basado en websocket para comunicación de grandes flujos de datos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node websocket_server.js"
+  },
+  "author": "David González Filoso <dgfiloso@b105.upm.es>",
+  "license": "ISC",
+  "dependencies": {
+    "nodejs-websocket": "^1.7.1"
+  }
+}
