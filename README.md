@@ -7,7 +7,7 @@
 + B105 Electronic Systems Lab
 + Escuela Técnica Superior de Ingenieros de Telecomunicación
 + Universidad Politécnica de Madrid
-+ Versión : 1.0
++ Versión : 2.0
 + Descripción :
 
 	Diseño e implementación de una red de nodos inalámbricos para comunicaciones multipunto de contenido multimedia.
