@@ -2,35 +2,35 @@
 
 # Trabajo de Fin de Grado - Diseño e implementación de una red de nodos inalámbricos para comunicaciones multipunto de contenido multimedia.
 
-	##	Resumen
-	* David González Filoso
-	* B105 Electronic Systems Lab
-	* Escuela Técnica Superior de Ingenieros de Telecomunicación
-	* Universidad Politécnica de Madrid
-	* Versión : 1.0
-	* Descripción :
+##	Resumen
+* David González Filoso
+* B105 Electronic Systems Lab
+* Escuela Técnica Superior de Ingenieros de Telecomunicación
+* Universidad Politécnica de Madrid
+* Versión : 1.0
+* Descripción :
 
-		Diseño e implementación de una red de nodos inalámbricos para comunicaciones multipunto de contenido multimedia.
+	Diseño e implementación de una red de nodos inalámbricos para comunicaciones multipunto de contenido multimedia.
 
-	##	Estructura
-		El sistema va a estar formado por dos partes:
-		+ Servidor node.js implementado en una Raspberry Pi 3 model B.
-		+ Cliente que puede ser transmisor o receptor. En esta versión el cliente será un ordenador.
+##	Estructura
+	El sistema va a estar formado por dos partes:
+	+ Servidor node.js implementado en una Raspberry Pi 3 model B.
+	+ Cliente que puede ser transmisor o receptor. En esta versión el cliente será un ordenador.
 
-	##	Servidor
-		+ Instalar nodejs, nodejs-legacy y npm.
-		+ Descargar los archivos de la carpeta Servidor.
-		+ Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Servidor.
-		+ Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Servidor.
+##	Servidor
+	+ Instalar nodejs, nodejs-legacy y npm.
+	+ Descargar los archivos de la carpeta Servidor.
+	+ Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Servidor.
+	+ Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Servidor.
 
-	##	Cliente
-		+ Instalar nodejs, nodejs-legacy y npm.
-		+	Instalar pulseaudio, ffmpeg y libav-tools.
-		+ Descargar los archivos de la carpeta Cliente.
-		+ Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Cliente.
-		+ Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Cliente.
+##	Cliente
+	+ Instalar nodejs, nodejs-legacy y npm.
+	+	Instalar pulseaudio, ffmpeg y libav-tools.
+	+ Descargar los archivos de la carpeta Cliente.
+	+ Ejecutar el comando 'npm install' para instalar las librerí­as en la carpeta Cliente.
+	+ Ejecutar el comando 'npm start' para ejecutar el servidor	en la carpeta Cliente.
 
-	##	Versiones
-		+	Versión 1.0:
+##	Versiones
+	+	Versión 1.0:
 
-			El servidor se ejecuta en una Raspberry Pi o en un ordenador. Los clientes son solo ordenadores, con el mismo código, que a través de una interfaz por línea de comandos se indica si eres transmisor o receptor.
+		El servidor se ejecuta en una Raspberry Pi o en un ordenador. Los clientes son solo ordenadores, con el mismo código, que a través de una interfaz por línea de comandos se indica si eres transmisor o receptor.
