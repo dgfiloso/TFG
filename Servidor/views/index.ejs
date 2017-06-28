@@ -1,89 +1,131 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<script type="text/javascript" src="js/socket.io.js"></script>
+		<script type="text/javascript" src="js/jquery-3.2.0.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="css/styles.css">
 		<title> Cerebro </title>
-		<script type="text/javascript" src="/socket.io.js"></script>
-		<script type="text/javascript" src="/jquery-3.2.0.js"></script>
-		<script type="text/javascript" src="/app.js"></script>
 	</head>
 	<body>
 		<header>
-			<h1>Panel de Control de Cerebro </h1>
+			<div class="jumbotron">
+				<div class="container">
+					<h1>Cerebro - Panel de control</h1>
+					<h2>Página para el control del servidor Cerebro y todos sus mutantes. En ella podrás realizar las conexiones entre mutantes.</h2>
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-1">
+									<span class="sr-only">Menú</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+							<div class="collapse navbar-collapse" id="navbar-1">
+								<ul class="nav navbar-nav">
+									<li class="active"><a href="/">Inicio</a></li>
+									<li><a href="/room">Conectar receptor</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
 		</header>
-		<nav class="main" role="navigation">
-			<a href="/">Inicio</a>
-			<a href="/room">Conectar receptor</a>
-		</nav>
-		<section class="main">
-			<div id="bitRate">
-				<% if (bitRate_ts < 1000) { %>
-					Tasa de bits Tx-Servidor: <%= bitRate_ts %> bps
-				<% } else if (bitRate_ts < 1000000) { %>
-					<% bitRate_ts = Math.round(bitRate_ts / 10)/100; %>
-					Tasa de bits Tx-Servidor: <%= bitRate_ts %> Kbps
-				<% } else if (bitRate_ts < 1000000000) { %>
-					<% bitRate_ts = Math.round(bitRate_ts / 10000)/100; %>
-					Tasa de bits Tx-Servidor: <%= bitRate_ts %> Mbps
-				<% } else if (bitRate_ts < 1000000000000) { %>
-					<% bitRate_ts = Math.round(bitRate_ts / 10000000)/100; %>
-					Tasa de bits Tx-Servidor: <%= bitRate_ts %> Gbps
-				<% } else if (bitRate_ts >1000000000000){ %>
-					<% bitRate_ts = Math.round(bitRate_ts / 10000000000)/100; %>
-					Tasa de bits Tx-Servidor: <%= bitRate_ts %> Tbps
-				<% } else { %>
-					Tasa de bits Tx-Servidor: Undefined
-				<% } %>
-				<p>
-				<% if (bitRate_sr < 1000) { %>
-					Tasa de bits Servidor-Rx: <%= bitRate_sr %> bps
-				<% } else if (bitRate_sr < 1000000) { %>
-					<% bitRate_sr = Math.round(bitRate_sr / 10)/100; %>
-					Tasa de bits Servidor-Rx: <%= bitRate_sr %> Kbps
-				<% } else if (bitRate_sr < 1000000000) { %>
-					<% bitRate_sr = Math.round(bitRate_sr / 10000)/100; %>
-					Tasa de bits Servidor-Rx: <%= bitRate_sr %> Mbps
-				<% } else if (bitRate_sr < 1000000000000) { %>
-					<% bitRate_sr = Math.round(bitRate_sr / 10000000)/100; %>
-					Tasa de bits Servidor-Rx: <%= bitRate_sr %> Gbps
-				<% } else if (bitRate_sr >1000000000000){ %>
-					<% bitRate_sr = Math.round(bitRate_sr / 10000000000)/100; %>
-					Tasa de bits Servidor-Rx: <%= bitRate_sr %> Tbps
-				<% } else { %>
-					Tasa de bits Servidor-Rx: Undefined
-				<% } %>
-			</div>
-			<div id="tabla">
-				<table>
-					<tr>
-						<th colspan="2">Transmisores</th>
-						<th colspan="2">Receptores</th>
-					</tr>
-					<tr>
-						<td>Nombre</td><td>Habitación</td>
-						<td>Nombre</td><td>Habitación</td>
-					</tr>
-						<% for (var i in clients) { %>
-							<tr>
-								<% if (tx[i] === undefined && rx[i] === undefined) { %>
-									<% break; %>
-								<% } else { %>
-									<% if(tx[i] !== undefined) { %>
-										<td><%= tx[i].name %></td>
-										<td><%= tx[i].room %></td>
+		<div class="container">
+			<div class="row">
+				<div id="tabla" class="table-responsive col-xs-12 col-sm-8 col-md-9">
+					<table class="table table-border">
+						<tr class="success">
+							<th colspan="2">Transmisores</th>
+							<th colspan="2">Receptores</th>
+						</tr>
+						<tr>
+							<td class="active">Nombre</td><td class="active">Habitación</td>
+							<td class="active">Nombre</td><td class="active">Habitación</td>
+						</tr>
+							<% for (var i in clients) { %>
+								<tr>
+									<% if (tx[i] === undefined && rx[i] === undefined) { %>
+										<% break; %>
 									<% } else { %>
-										<td></td><td></td>
+										<% if(tx[i] !== undefined) { %>
+											<td><%= tx[i].name %></td>
+											<td><%= tx[i].room %></td>
+										<% } else { %>
+											<td></td><td></td>
+										<% } %>
+										<% if(rx[i] !== undefined) { %>
+											<td><%= rx[i].name %></td>
+											<td><%= rx[i].room %></td>
+										<% } else { %>
+											<td></td><td></td>
+										<% } %>
 									<% } %>
-									<% if(rx[i] !== undefined) { %>
-										<td><%= rx[i].name %></td>
-										<td><%= rx[i].room %></td>
-									<% } else { %>
-										<td></td><td></td>
-									<% } %>
-								<% } %>
-							</tr>
+								</tr>
+							<% } %>
+					</table>
+				</div>
+				<div id="bitRate" class="col-xs-12 col-sm-4 col-md-3">
+					<table class="table table-border">
+						<tr class="danger">
+							<th>Tx -> Server</th>
+							<th>Server -> Rx</th>
+						</tr>
+						<tr>
+						<% if (bitRate_ts < 1000) { %>
+							<td><%= bitRate_ts %> bps</td>
+						<% } else if (bitRate_ts < 1000000) { %>
+							<% bitRate_ts = Math.round(bitRate_ts / 10)/100; %>
+							<td><%= bitRate_ts %> Kbps</td>
+						<% } else if (bitRate_ts < 1000000000) { %>
+							<% bitRate_ts = Math.round(bitRate_ts / 10000)/100; %>
+							<td><%= bitRate_ts %> Mbps</td>
+						<% } else if (bitRate_ts < 1000000000000) { %>
+							<% bitRate_ts = Math.round(bitRate_ts / 10000000)/100; %>
+							<td><%= bitRate_ts %> Gbps</td>
+						<% } else if (bitRate_ts >1000000000000){ %>
+							<% bitRate_ts = Math.round(bitRate_ts / 10000000000)/100; %>
+							<td><%= bitRate_ts %> Tbps</td>
+						<% } else { %>
+							<td>Undefined</td>
 						<% } %>
-				</table>
+
+						<% if (bitRate_sr < 1000) { %>
+							<td><%= bitRate_sr %> bps</td>
+						<% } else if (bitRate_sr < 1000000) { %>
+							<% bitRate_sr = Math.round(bitRate_sr / 10)/100; %>
+							<td><%= bitRate_sr %> Kbps</td>
+						<% } else if (bitRate_sr < 1000000000) { %>
+							<% bitRate_sr = Math.round(bitRate_sr / 10000)/100; %>
+							<td><%= bitRate_sr %> Mbps</td>
+						<% } else if (bitRate_sr < 1000000000000) { %>
+							<% bitRate_sr = Math.round(bitRate_sr / 10000000)/100; %>
+							<td><%= bitRate_sr %> Gbps</td>
+						<% } else if (bitRate_sr >1000000000000){ %>
+							<% bitRate_sr = Math.round(bitRate_sr / 10000000000)/100; %>
+							<td><%= bitRate_sr %> Tbps</td>
+						<% } else { %>
+							<td>Undefined</td>
+						<% } %>
+						</tr>
+					</table>
+				</div>
+	   </div>
+		</div>
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<span class="text-muted">David González Filoso - dgfiloso@b105.upm.es - B105 Electronic Systems Lab</span>
+					</div>
+				</div>
 			</div>
-	    </section>
+		</footer>
 	</body>
 </html>
