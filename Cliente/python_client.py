@@ -1,6 +1,13 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
+"""*************************************************************
+*   @file       python_client.py
+*   @version    2.1
+*   @author     David González Filoso <dgfiloso@b105.upm.es>
+*   @company    B105 Electronic Systems Lab
+*   @description Cliente de Cerebro. Pide la dirección del servidor
+*					y el tipo de cliente.
+*************************************************************"""
 import threading	#	Librería para usar distintas hebras
 import json			#	Librería para usar objetos JSON
 import subprocess	#	Librería para usar procesos del sistema

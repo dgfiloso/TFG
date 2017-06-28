@@ -3,7 +3,7 @@
 *	@file 		websocket_server.js
 *	@author 	David Gonzalez Filoso <dgfiloso@b105.upm.es>
 *	@summary 	Servidor que escucha los sockets y los conecta entre ellos para enviarse archivos
-*	@version	v2.1.1
+*	@version	v2.1
 *
 **/
 
