@@ -29,6 +29,10 @@ El sistema va a estar formado por dos partes:
 + Descargar los archivos de la carpeta Cliente.
 
 ##	Versiones
++	Versión 2.1:
+
+	Se ha añadido un gestor web que corre en el puerto 5000 del servidor. En este gestor se pueden ver los transmisores y receptores conectados, así como la tasa binaria que se está usando.
+	
 + Versión 2.0:
 
 	El servidor se mantiene ejecutándose en una Raspberry Pi o en un ordenador pero ahora pasa a usar la librería Websocket. El cliente se ejecuta en un ordenador y pasa a programarse en Python, se controla mediante la línea de comandos. Puede ser transmisor o receptor.

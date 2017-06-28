@@ -5,11 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node websocket_server.js"
+    "start": "node cerebro.js",
+    "build": "browserify public/app.js -o public/bundle.js"
   },
   "author": "David González Filoso <dgfiloso@b105.upm.es>",
   "license": "ISC",
   "dependencies": {
-    "nodejs-websocket": "^1.7.1"
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "jquery": "^3.2.1",
+    "nodejs-websocket": "^1.7.1",
+    "path": "^0.12.7",
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3"
   }
 }

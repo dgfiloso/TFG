@@ -1,20 +1,28 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-"""*************************************************************
-*   @file       python_client.py
-*   @version    2.0
-*   @author     David González Filoso <dgfiloso@b105.upm.es>
-*   @company    B105 Electronic Systems Lab
-*   @description Cliente de Cerebro. Pide la dirección del servidor
-*					y el tipo de cliente.
-*************************************************************"""
 
-import websocket 	#	Librería para usar websockets
 import threading	#	Librería para usar distintas hebras
 import json			#	Librería para usar objetos JSON
 import subprocess	#	Librería para usar procesos del sistema
+import sys			#	Librería para usar el sistema
+try:
+	import websocket 	#	Librería para usar websockets
+except ImportError:
+	import pip
+	pip.main(['install','--user','websocket-client'])
+	try:
+		import websocket
+	except ImportError:
+		import websocket
 #	Librerías de GStreamer
-import gi
+try:
+	import gi
+except ImportError:
+	print "#Error: Gstreamer not installed"
+	print "\t Execute 'sudo apt-get install gstreamer1.0 gstreamer1.0-*'"
+	print "\t Execute 'sudo apt-get install python-gst-1.0'"
+	sys.exit();
+
 gi.require_version('Gst','1.0')
 gi.require_version('Gtk','3.0')
 from gi.repository import GObject, Gtk
@@ -22,17 +30,18 @@ from gi.repository import Gio as gio
 from gi.repository import Gst as gst
 
 OPCODE			= 1			#	Variable que guarda el valor del opcode del último mensaje
-tipo_mutante 	= None		#	Variable que guarda el tipo de mutante del cliente
+mutant_type 	= None		#	Variable que guarda el tipo de mutante del cliente
+mutant_name 	= None		#	Variable que guarda el nombre del mutante
 buff_Rx			= gio.MemoryInputStream()	#	Memoria que guarda los datos de entrada
 tx_pipeline     = None		#	Variable que guarda el pipeline de transmisión
 rx_pipeline 	= None		#	Variable que guarda el pipeline de recepción
 play			= 0			#	Variable que se usa para esperar 20 paquetes antes de empezar a reproducir
 
+GObject.threads_init()
+gst.init(None)
 #	Descomentar para ver las trazas de GStreamer y detectar posibles errores
 # gst.debug_set_active(True)
 # gst.debug_set_default_threshold(3)
-GObject.threads_init()
-gst.init(None)
 
 
 def control_Tx(conn):
@@ -49,6 +58,12 @@ def control_Tx(conn):
 	Si la transmisión es finalizada no se puede volver a iniciar
 
 	"""
+	print "\n\n"
+	print "	-------- Comandos de control:"
+	print "	-------- :p -> Pausar"
+	print "	-------- :r -> Continuar (Despues de pausar)"
+	print "	-------- :q -> Finalizar"
+	print "\n\n"
 	comando = raw_input()
 	while True:
 		if comando  == ':p':
@@ -62,6 +77,7 @@ def control_Tx(conn):
 		elif comando == ':q':
 			conn.send(json.dumps({"event": "endTx", "data": "ENDED COMMUNICATION"}))
 			tx_pipeline.set_state(gst.State.NULL)
+			sys.exit();
 			print "ENDED COMMUNICATION"
 			break
 
@@ -253,6 +269,8 @@ def on_message(conn, msg):
 	"""
 
 	global rx_pipeline
+	global play
+	global buff_Rx
 
 	if OPCODE == websocket.ABNF.OPCODE_TEXT:
 
@@ -262,26 +280,30 @@ def on_message(conn, msg):
 		if event == "ACK":
 			data = mensaje["data"]
 			print data
-			print "¿Que tipo de mutante eres (T o R)?"
-			global tipo_mutante
 
-			tipo_mutante = raw_input("--> ")
-			while (tipo_mutante != "R") and (tipo_mutante != "T"):
-				tipo_mutante = raw_input("--> ")
-				print "Tipo de mutante while: "+tipo_mutante
+			print "¿Cúal es el nombre del mutante?"
+			global mutant_name
+			mutant_name = raw_input("--> ")
 
-			print "Tipo de mutante: "+tipo_mutante
-			conn.send(json.dumps({"event": "clientInfo", "data": tipo_mutante}))
-			print "Enviada informacion del mutante"
+			print "¿Qué tipo de mutante eres? (T o R)"
+			global mutant_type
+			mutant_type = raw_input("--> ")
+			while (mutant_type != "R") and (mutant_type != "T"):
+				print "Error: Solo puede ser Transmisor (T) o Receptor (R)"
+				mutant_type = raw_input("--> ")
+
+			conn.send(json.dumps({"event": "clientInfo", "name": mutant_name, "type": mutant_type}))
+			print "Enviada informacion del mutante {nombre: "+mutant_name+" tipo: "+mutant_type+" }"
 			print "Esperando datos..."
 
 		elif event == "envio":
-			print "Escriba 'Enviar' si desea compartir su audio con los receptores"
+			print "Escriba 'E' si desea compartir su audio con los receptores"
 
 			respuesta = raw_input("--> ")
-			while respuesta != "Enviar":
+			while respuesta != "E":
 				respuesta = raw_input("--> ")
 
+			conn.send(json.dumps({"event": "initTx"}))
 			send_audio(conn)
 
 		elif event == "pausedTx":
@@ -294,23 +316,23 @@ def on_message(conn, msg):
 
 		elif event == "endTx":
 			rx_pipeline.set_state(gst.State.NULL)
+			play=0
+			buff_Rx = None;
+			buff_Rx = gio.MemoryInputStream()
 			print mensaje["data"]
 
 
 	elif OPCODE == websocket.ABNF.OPCODE_BINARY:
 
-		global buff_Rx
-		global play
-
 		if play == 20:
-			buff_Rx.add_data(msg)
+			buff_Rx.add_data(msg, None)
 			play+=1
 			gst_play = threading.Thread(target=player)
 			gst_play.setDaemon(True)
 			gst_play.start()
 
 		else:
-			buff_Rx.add_data(msg)
+			buff_Rx.add_data(msg, None)
 			if play < 20:
 				play +=1
 
