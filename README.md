@@ -25,6 +25,7 @@ El sistema va a estar formado por dos partes:
 
 ##	Cliente
 + Instalar python y python-pip.
++ Instalar gstreamer1.0, gstreamer1.0-* , python-gst-1.0
 + Descargar los archivos de la carpeta Cliente.
 
 ##	Versiones
