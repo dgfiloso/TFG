@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Cerebro </title>
+	</head>
+	<body>
+		<header>
+			<h1>Panel de Control de Cerebro </h1>
+		</header>
+		<nav class="main" role="navigation">
+			<a href="/">Inicio</a>
+			<a href="/room">Conectar receptor</a>
+		</nav>
+		<div id="form">
+			<form method="POST" action="/room">
+				Elija el receptor que quiere conectar:
+				<select name="rxName">
+					<% for (var i in rx) { %>
+						<option><%= rx[i].name %></option>
+					<% } %>
+				</select>
+				<p>
+				Elija el transmisor al que quiere conectarlo:
+				<select name="txName">
+					<option>Desconectar</option>
+					<% for (var i in tx) { %>
+						<option><%= tx[i].name %></option>
+					<% } %>
+				</select>
+				<p>
+				<button type="submit">Conectar</button>
+			</form>
+	</body>
+</html>

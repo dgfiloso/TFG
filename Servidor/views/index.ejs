@@ -12,7 +12,7 @@
 		</header>
 		<nav class="main" role="navigation">
 			<a href="/">Inicio</a>
-			<a href="/room">Nueva habitación</a>
+			<a href="/room">Conectar receptor</a>
 		</nav>
 		<section class="main">
 			<div id="bitRate">
@@ -55,8 +55,12 @@
 			<div id="tabla">
 				<table>
 					<tr>
-						<th>Transmisores</th>
-						<th>Receptores</th>
+						<th colspan="2">Transmisores</th>
+						<th colspan="2">Receptores</th>
+					</tr>
+					<tr>
+						<td>Nombre</td><td>Habitación</td>
+						<td>Nombre</td><td>Habitación</td>
 					</tr>
 						<% for (var i in clients) { %>
 							<tr>
@@ -65,13 +69,15 @@
 								<% } else { %>
 									<% if(tx[i] !== undefined) { %>
 										<td><%= tx[i].name %></td>
+										<td><%= tx[i].room %></td>
 									<% } else { %>
-										<td></td>
+										<td></td><td></td>
 									<% } %>
 									<% if(rx[i] !== undefined) { %>
 										<td><%= rx[i].name %></td>
+										<td><%= rx[i].room %></td>
 									<% } else { %>
-										<td></td>
+										<td></td><td></td>
 									<% } %>
 								<% } %>
 							</tr>

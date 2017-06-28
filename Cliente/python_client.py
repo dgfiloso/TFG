@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """*************************************************************
 *   @file       python_client.py
-*   @version    2.1
+*   @version    2.2
 *   @author     David González Filoso <dgfiloso@b105.upm.es>
 *   @company    B105 Electronic Systems Lab
 *   @description Cliente de Cerebro. Pide la dirección del servidor
@@ -136,8 +136,11 @@ def on_new_buffer(appsink):
 	Esta función salta cuando el pipeline de transmisión emite una señal
 	de tipo 'new-sample'. Se encarga de enviar esos datos a través de los sockets.
 
-	"""
+	appsink.emit('pull-sample') 					-> Devuelve un objeto de tipo Gst.Sample
+	appsink.emit('pull-sample').get_buffer() 		-> Devuelve el Gst.Buffer de la muestra
+	Gst.Buffer.extract_dup(0, tx_buffer.get_size()) -> Devuelve una copia de los datos desde el punto 0 hasta el punto indicado, en nuestro caso el tamaño total
 
+	"""
 	tx_buffer = appsink.emit('pull-sample').get_buffer()
 	tx_data = tx_buffer.extract_dup(0, tx_buffer.get_size())
 	conn.send(tx_data, websocket.ABNF.OPCODE_BINARY)
@@ -310,7 +313,6 @@ def on_message(conn, msg):
 			while respuesta != "E":
 				respuesta = raw_input("--> ")
 
-			conn.send(json.dumps({"event": "initTx"}))
 			send_audio(conn)
 
 		elif event == "pausedTx":

@@ -3,12 +3,13 @@
 *	@file 		websocket_server.js
 *	@author 	David Gonzalez Filoso <dgfiloso@b105.upm.es>
 *	@summary 	Servidor que escucha los sockets y los conecta entre ellos para enviarse archivos
-*	@version	v2.1
+*	@version	v2.2
 *
 **/
 
 //	Importamos librerias
 var express = require('express');
+var body_parser = require('body-parser');
 var app = express();
 var web_server = require('http').Server(app);
 var io = require('socket.io')(web_server);
@@ -33,7 +34,7 @@ web_server.listen(5000, function() {
 **/
 //	Arrays que contendrán los sockets y las habitaciones
 var clients = [];
-var rooms = [];
+var rooms = 0;
 
 //	Secuencia que envía cada segundo los bits que se están enviando
 var bits_ts = 0;		//	Número de bits de transmisores a servidor
@@ -61,6 +62,13 @@ server.on('connection', function(conn) {
 		console.log("Desconectado mutante");
 		for(var i in clients) {
 			if(clients[i].socket === conn) {
+				if(clients[i].type === "T") {
+					for (var j in clients) {
+						if (clients[j].room === clients[i].room) {
+							clients[j].room = 0;
+						}
+					}
+				}
 				clients.splice(i,1);
 				io.sockets.emit('refreshTable');
 			}
@@ -88,13 +96,14 @@ server.on('connection', function(conn) {
 			clientInfo.socket = conn;
 			clientInfo.type = mutant_type;
 			clientInfo.name = mutant_name;
+			clientInfo.room = 0;
 
 			console.log("Añadido Mutante: { name: "+clientInfo.name+" type: "+clientInfo.type+" }");
 
 			if(clientInfo.type === "T") {
 
 				//	Si el cliente es un transmisor, le enviamos un mensaje para que comience a transmitir
-				clientInfo.tx = false;
+				clientInfo.room = ++rooms;
 				conn.sendText(JSON.stringify({event: "envio"}));
 				console.log("Enviada peticion para transmitir archivo");
 			}
@@ -106,19 +115,6 @@ server.on('connection', function(conn) {
 		}
 
 		/**
-		*	Evento "initTx"
-		*	@summary	Informa al servidor de que va a empezar a transmitir
-		**/
-		else if (event === "initTx")  {
-
-			for (var i in clients) {
-				if (clients[i].socket === conn) {
-					clients[i].tx = true;
-				}
-			}
-		}
-
-		/**
 		*	Evento "pausedTx"
 		*	@summary	Envia a todos los receptores el evento pausedTx
 		**/
@@ -126,8 +122,15 @@ server.on('connection', function(conn) {
 
 			var data = JSON.parse(str).data;
 
+			var txRoom = 0;
 			for (var i in clients) {
-				if((clients[i].socket !== conn)&&(clients[i].type === "R")) {
+				if(clients[i].socket === conn) {
+					txRoom = clients[i].room;
+				}
+			}
+
+			for (var i in clients) {
+				if((clients[i].socket !== conn)&&(clients[i].type === "R")&&(clients[i].room === txRoom)) {
 					clients[i].socket.sendText(JSON.stringify({event: event, data: data}));
 				}
 			}
@@ -141,8 +144,15 @@ server.on('connection', function(conn) {
 
 			var data = JSON.parse(str).data;
 
+			var txRoom = 0;
 			for (var i in clients) {
-				if((clients[i].socket !== conn)&&(clients[i].type === "R")) {
+				if(clients[i].socket === conn) {
+					txRoom = clients[i].room;
+				}
+			}
+
+			for (var i in clients) {
+				if((clients[i].socket !== conn)&&(clients[i].type === "R")&&(clients[i].room === txRoom)) {
 					clients[i].socket.sendText(JSON.stringify({event: event, data: data}));
 				}
 			}
@@ -156,11 +166,16 @@ server.on('connection', function(conn) {
 
 			var data = JSON.parse(str).data;
 
+			var txRoom = 0;
 			for (var i in clients) {
-				if (clients[i].socket === conn) {
-					clients[i].tx = false;
+				if(clients[i].socket === conn) {
+					txRoom = clients[i].room;
 				}
-				if((clients[i].socket !== conn)&&(clients[i].type === "R")) {
+			}
+
+			for (var i in clients) {
+				if((clients[i].socket !== conn)&&(clients[i].type === "R")&&(clients[i].room === txRoom)) {
+					clients[i].room = 0;
 					clients[i].socket.sendText(JSON.stringify({event: event, data: data}));
 				}
 			}
@@ -170,11 +185,16 @@ server.on('connection', function(conn) {
 	conn.on('binary', function(inStream) {
 
 		inStream.on('readable', function() {
-
+			var txRoom = 0;
 			var data = inStream.read();
 			bits_ts += data.byteLength * 8;
+			for (var i in clients) {
+				if(clients[i].socket === conn) {
+					txRoom = clients[i].room;
+				}
+			}
 			for (var i in clients){
-				if((clients[i].socket !== conn)&&(clients[i].type === "R")){
+				if((clients[i].socket !== conn)&&(clients[i].type === "R")&&(clients[i].room === txRoom)){
 					// console.log("Client "+i+" : "+data.length);
 					bits_sr += data.byteLength * 8;
 					clients[i].socket.sendBinary(data);
@@ -198,6 +218,7 @@ app.set('view engine', 'ejs');
 
 //	Servir contenido estatico
 app.use(express.static(path.join(__dirname,'public')));
+app.use(body_parser.urlencoded({extended:true}));
 
 /* GET home page. */
 app.get('/', function(req, res, next) {
@@ -217,10 +238,40 @@ app.get('/', function(req, res, next) {
 /*	Rutas	*/
 app.get('/room', function(req, res, next) {
 	var tx = [];
+	var rx = [];
 	for (var i in clients) {
 		if (clients[i].type === "T") {
 			tx.push(clients[i]);
+		} else if (clients[i].type === "R") {
+			rx.push(clients[i]);
 		}
 	}
-	res.render('new_room', {tx: tx});
+	res.render('rx_room', {tx: tx, rx: rx});
+});
+
+app.post('/room', function(req, res, next) {
+	for (var i in clients) {
+		if (clients[i].name === req.body.rxName) {
+			if (req.body.txName === "Desconectar") {
+				clients[i].room = 0;
+				clients[i].socket.sendText(JSON.stringify({event: "endTx", data: "ENDED COMMUNICATION"}));
+			} else {
+				for (var j in clients) {
+					if (clients[j].name === req.body.txName) {
+						clients[i].room = clients[j].room;
+					}
+				}
+			}
+		}
+	}
+	var tx = [];
+	var rx = [];
+	for (var i in clients) {
+		if (clients[i].type === "T") {
+			tx.push(clients[i]);
+		} else if (clients[i].type === "R") {
+			rx.push(clients[i]);
+		}
+	}
+	res.redirect('/');
 });

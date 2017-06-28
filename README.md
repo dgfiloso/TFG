@@ -7,7 +7,7 @@
 + B105 Electronic Systems Lab
 + Escuela Técnica Superior de Ingenieros de Telecomunicación
 + Universidad Politécnica de Madrid
-+ Versión : 2.1
++ Versión : 2.2
 + Descripción :
 
 	Diseño e implementación de una red de nodos inalámbricos para comunicaciones multipunto de contenido multimedia.
@@ -29,6 +29,10 @@ El sistema va a estar formado por dos partes:
 + Descargar los archivos de la carpeta Cliente.
 
 ##	Versiones
++	Versión 2.2:
+
+	He implementado el concepto de "habitación". Un transmisor transmite de manera independiente en una "habitación". Desde el gestor web hay que conectar los receptores a una "habitación" para que puedan recibir el audio.
+
 +	Versión 2.1:
 
 	Se ha añadido un gestor web que corre en el puerto 5000 del servidor. En este gestor se pueden ver los transmisores y receptores conectados, así como la tasa binaria que se está usando.
