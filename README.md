@@ -7,7 +7,7 @@
 + B105 Electronic Systems Lab
 + Escuela Técnica Superior de Ingenieros de Telecomunicación
 + Universidad Politécnica de Madrid
-+ Versión : 2.3
++ Versión : 2.4
 + Descripción :
 
 	Diseño e implementación de una red de nodos inalámbricos para comunicaciones multipunto de contenido multimedia.
@@ -15,7 +15,7 @@
 ##	Estructura
 El sistema va a estar formado por dos partes:
 + Servidor node.js implementado en una Raspberry Pi 3 model B.
-+ Cliente que puede ser transmisor o receptor. En esta versión el cliente será un ordenador controlado por línea de comandos.
++ Cliente que puede ser transmisor o receptor. En esta versión el cliente de ordenador se controlará por una interfaz gráfica.
 
 ##	Servidor
 + Instalar nodejs, nodejs-legacy y npm.
@@ -31,18 +31,15 @@ El sistema va a estar formado por dos partes:
 + Si se desea recibir ayuda a la hora de ejecutar el script se puede usar el flag --help. Con ese flag se pueden ver las posibilidades de flags de depuración que tiene el script.
 
 ##	Cliente ESP8266
-Se va a hacer uso del firmware NodeMcu. Con este firmware se puede subir scripts de Lua al ESP8266.
-+	Primero, hay que obtener el firmware con las librerías que se desean usar, mi recomendación es obtenerlo desde su compilador en la nube.
-
-	https://nodemcu-build.com/
-
-+ Segundo, hay que flashear el firmware en el ESP8266. Yo utilizo esptool.py para ello.
-
-	esptool.py --port <usb-port> write_flash -fm dio 0x00000 <nodemcu-firmware>.bin
-
-+	Tercero, usando la herramienta ESPlorer, nos conectamos al ESP8266 y le subimos los scripts de Lua. Con esta herramienta también contamos con una consola para ver las trazas del programa.
+Se utiliza el sistema operativo Simba. Para ello se hace uso del editor de texto Atom y del entorno de desarrollo PlatformIO, dirigido a sistemas empotrados. Debido a que se han hecho modificaciones en el código de las librerías de Simba, se ha copiado todo el código del sistema operativo y de las librerías en la carpeta lib/mutantLib/. Además se ha tenido que modificar la librería de Websocket para que se conectara al servidor, por ello si se desea utilizar hay que sustituir el contenido de la carpeta /home/usuario/.platformio/packages/framework-simba por el contenido de lib/mutantLib. Desde Atom con PlatformIO el acceso al puerto serie se realiza a 74880.
 
 ##	Versiones
++ Versión 2.4:
+
+	El cliente del ESP8266 se ha pasado a implementar con el sistema operativo Simba. Debido a problemas con el driver del SPI, solo se ha conseguido que cuando reciba los datos, los descarte. Además se ha añadido una opción en la página web para eliminar del sistema clientes.
+
+	Se ha añadido documentación con Doxygen para el cliente del ESP8266 con Simba. Se puede consultar en la carpeta Cliente/Simba_Client/html
+
 +	Versión 2.3:
 
 	Se ha mejorado la apariencia de la página web de control haciendo uso de Bootstrap. También se ha creado una interfaz gráfica para el script del cliente. Se ha realizado una implementación del cliente del ESP8266 usando Lua pero han aparecido problemas de memoria al recibir los datos, se llenaba la memoria antes de procesarlos.

@@ -1,0 +1,6 @@
+ignore:
+  - "3pp"
+  - "examples"
+  - "src/boards"
+  - "src/drivers"
+  - "tst"

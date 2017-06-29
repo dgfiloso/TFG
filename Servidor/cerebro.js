@@ -3,7 +3,7 @@
 *	@file 		websocket_server.js
 *	@author 	David Gonzalez Filoso <dgfiloso@b105.upm.es>
 *	@summary 	Servidor que escucha los sockets y los conecta entre ellos para enviarse archivos
-*	@version	v2.3
+*	@version	v2.4
 *
 **/
 
@@ -70,11 +70,16 @@ server.on('connection', function(conn)
 			{
 				if(clients[i].type === "T")
 				{
+					rooms--;
 					for (var j in clients)
 					{
 						if (clients[j].room === clients[i].room)
 						{
 							clients[j].room = 0;
+						}
+						else if (clients[j].room != 0)
+						{
+							clients[j].room--;
 						}
 					}
 				}
@@ -112,7 +117,8 @@ server.on('connection', function(conn)
 
 			if(clientInfo.type === "T")
 			{
-				clientInfo.room = ++rooms;
+				rooms++;
+				clientInfo.room = rooms;
 			}
 
 			clients.push(clientInfo);
@@ -280,6 +286,11 @@ app.get('/room', function(req, res, next)
 	res.render('rx_room', {tx: tx, rx: rx});
 });
 
+app.get('/delete', function(req, res, next)
+{
+	res.render('delete', {clients: clients});
+});
+
 app.post('/room', function(req, res, next)
 {
 	for (var i in clients)
@@ -301,6 +312,32 @@ app.post('/room', function(req, res, next)
 					}
 				}
 			}
+		}
+	}
+	var tx = [];
+	var rx = [];
+	for (var i in clients)
+	{
+		if (clients[i].type === "T")
+		{
+			tx.push(clients[i]);
+		}
+		else if (clients[i].type === "R")
+		{
+			rx.push(clients[i]);
+		}
+	}
+	res.redirect('/');
+});
+
+app.post('/delete', function(req, res, next)
+{
+	for (var i in clients)
+	{
+		if (clients[i].name === req.body.deleteName)
+		{
+			clients[i].socket.sendText(JSON.stringify({event: "endTx", data: "ENDED COMMUNICATION"}));
+			clients.splice(i,1);
 		}
 	}
 	var tx = [];

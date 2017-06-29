@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Mutante ESP8266 en Simba: Referencia del Archivo mutant.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Mutante ESP8266 en Simba
+   &#160;<span id="projectnumber">v2.4</span>
+   </div>
+   <div id="projectbrief">Cliente Websocket del servidor Cerebro para el ESP8266 con Simba</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Clases</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Miembros&#160;de&#160;los&#160;ficheros</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">'defines'</a> &#124;
+<a href="#enum-members">Enumeraciones</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo mutant.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Código - Lógica de control con el servidor Cerebro y gestión del audio recibido.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;simba.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="jsmn_8h_source.html">jsmn.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="mutant_8h_source.html">mutant.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para mutant.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="mutant_8c__incl.png" border="0" usemap="#mutant_8c" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+'defines'</h2></td></tr>
+<tr class="memitem:ae7a582b3ff3c6c9055439be1db4ab06d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7a582b3ff3c6c9055439be1db4ab06d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OPCODE_CONT</b>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:ae7a582b3ff3c6c9055439be1db4ab06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600c4e82d4a909ee737ed4c9910c6352"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a600c4e82d4a909ee737ed4c9910c6352"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OPCODE_TEXT</b>&#160;&#160;&#160;0x01</td></tr>
+<tr class="separator:a600c4e82d4a909ee737ed4c9910c6352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f34131d24ee91129bf4e87cddf8890e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f34131d24ee91129bf4e87cddf8890e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OPCODE_BINARY</b>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:a2f34131d24ee91129bf4e87cddf8890e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaab9e2cb75beae85842308d09d3308a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeaab9e2cb75beae85842308d09d3308a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OPCODE_CLOSE</b>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:aeaab9e2cb75beae85842308d09d3308a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1181c87f1de747365a6ab3378b615199"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1181c87f1de747365a6ab3378b615199"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OPCODE_PING</b>&#160;&#160;&#160;0x09</td></tr>
+<tr class="separator:a1181c87f1de747365a6ab3378b615199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae469ede0596e216ee3542e723097d633"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae469ede0596e216ee3542e723097d633"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OPCODE_PONG</b>&#160;&#160;&#160;0x0a</td></tr>
+<tr class="separator:ae469ede0596e216ee3542e723097d633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a001c1320bbf4019eff822d13ee252665"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a001c1320bbf4019eff822d13ee252665"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DATA_TEXT</b>&#160;&#160;&#160;0x01</td></tr>
+<tr class="separator:a001c1320bbf4019eff822d13ee252665"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70793237317579f8ef55263abe4c1f8e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70793237317579f8ef55263abe4c1f8e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DATA_BIN</b>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:a70793237317579f8ef55263abe4c1f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad01a13e0f95eb7fc1afc0853cb3ef283"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad01a13e0f95eb7fc1afc0853cb3ef283"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DATA_UNDEF</b>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:ad01a13e0f95eb7fc1afc0853cb3ef283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcb03ffb773d39d3a781a4d32a3c2c16"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcb03ffb773d39d3a781a4d32a3c2c16"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RCV_TEXT</b>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:adcb03ffb773d39d3a781a4d32a3c2c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a455ed3cfbc7e7148c82a71ab889868bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a455ed3cfbc7e7148c82a71ab889868bc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RCV_BIN</b>&#160;&#160;&#160;0x10</td></tr>
+<tr class="separator:a455ed3cfbc7e7148c82a71ab889868bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumeraciones</h2></td></tr>
+<tr class="memitem:a088a908bb093b9b608f5eb4a396dfe6b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a088a908bb093b9b608f5eb4a396dfe6b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>mutant_state</b> { <b>WAITING</b>, 
+<b>DATA_TYPE</b>, 
+<b>TEXT</b>, 
+<b>BIN</b>
+ }</td></tr>
+<tr class="separator:a088a908bb093b9b608f5eb4a396dfe6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:ab2287561e6758688cf7aa5dcf473d3e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfsm__t.html">fsm_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mutant_8c.html#ab2287561e6758688cf7aa5dcf473d3e5">fsm_mutant_new</a> (void)</td></tr>
+<tr class="memdesc:ab2287561e6758688cf7aa5dcf473d3e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea una nueva estructura de máquina de estados.  <a href="#ab2287561e6758688cf7aa5dcf473d3e5">Más...</a><br /></td></tr>
+<tr class="separator:ab2287561e6758688cf7aa5dcf473d3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75a2a24844d3322ae1c300cdc9631972"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mutant_8c.html#a75a2a24844d3322ae1c300cdc9631972">rcv_socket_size</a> (void)</td></tr>
+<tr class="memdesc:a75a2a24844d3322ae1c300cdc9631972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve la cantidad de datos recibidos por el socket TCP.  <a href="#a75a2a24844d3322ae1c300cdc9631972">Más...</a><br /></td></tr>
+<tr class="separator:a75a2a24844d3322ae1c300cdc9631972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26294211c955b0a1dfc33404aa840f64"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mutant_8c.html#a26294211c955b0a1dfc33404aa840f64">mutant_connect</a> (const char *server_ip, const int server_port)</td></tr>
+<tr class="memdesc:a26294211c955b0a1dfc33404aa840f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conexión del cliente al servidor Websocket.  <a href="#a26294211c955b0a1dfc33404aa840f64">Más...</a><br /></td></tr>
+<tr class="separator:a26294211c955b0a1dfc33404aa840f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Código - Lógica de control con el servidor Cerebro y gestión del audio recibido. </p>
+<p>Utilizando una máquina de estados de tipo Mealy gestiona la conexión con el servidor Cerebro a través de Websocket. Diferencia entre texto o datos binarios recibidos, para gestionarlo como un comando del sistema o como datos que tiene que enviar al descodificador.</p>
+<dl class="section version"><dt>Versión</dt><dd>2.4 </dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>David González Filoso <a href="#" onclick="location.href='mai'+'lto:'+'dgf'+'il'+'oso'+'@b'+'105'+'.u'+'pm.'+'es'; return false;">dgfil<span style="display: none;">.nosp@m.</span>oso@<span style="display: none;">.nosp@m.</span>b105.<span style="display: none;">.nosp@m.</span>upm.<span style="display: none;">.nosp@m.</span>es</a>  B105 - Electronic Systems Lab </dd></dl>
+</div><h2 class="groupheader">Documentación de las funciones</h2>
+<a class="anchor" id="ab2287561e6758688cf7aa5dcf473d3e5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfsm__t.html">fsm_t</a>* fsm_mutant_new </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea una nueva estructura de máquina de estados. </p>
+<p>Llama a la función para crear una nueva máquina de estados, tomando como parámetro la tabla de transiciones. </p>
+
+</div>
+</div>
+<a class="anchor" id="a26294211c955b0a1dfc33404aa840f64"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mutant_connect </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>server_ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>server_port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Conexión del cliente al servidor Websocket. </p>
+<p>Primero inicializa el cliente de Websocket indicando la IP del servidor y el puerto. Después lo conecta al servidor.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server_ip</td><td>String que contiene la dirección IP del servidor </td></tr>
+    <tr><td class="paramname">server_port</td><td>Entero con el puerto en el que esta escuchando el servidor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Devuelve 0 si no ha habido ningún problema, -1 si algo ha fallado </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a75a2a24844d3322ae1c300cdc9631972"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t rcv_socket_size </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve la cantidad de datos recibidos por el socket TCP. </p>
+<p>Hace uso del objeto cliente de Websocket para devolver la cantidad de bytes almacenados en la memoria de entrada del socket TCP.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">void</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>size_t Tamaño de los datos recibidos </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

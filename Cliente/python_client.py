@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """*************************************************************
 *   @file       python_client.py
-*   @version    2.3
+*   @version    2.4
 *   @author     David González Filoso <dgfiloso@b105.upm.es>
 *   @company    B105 Electronic Systems Lab
 *   @description Cliente de Cerebro. Tiene opciones para elegir la

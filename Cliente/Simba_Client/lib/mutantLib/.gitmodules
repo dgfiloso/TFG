@@ -1,0 +1,9 @@
+[submodule "3pp/esp32"]
+	path = 3pp/esp32
+	url = https://github.com/eerimoq/simba-esp32
+[submodule "3pp/mbedtls"]
+	path = 3pp/mbedtls
+	url = https://github.com/eerimoq/mbedtls
+[submodule "3pp/atto"]
+	path = 3pp/atto
+	url = https://github.com/eerimoq/atto

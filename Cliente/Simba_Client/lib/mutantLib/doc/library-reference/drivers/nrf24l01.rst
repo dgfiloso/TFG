@@ -1,0 +1,12 @@
+:mod:`nrf24l01` --- Wireless communication
+==========================================
+
+.. module:: nrf24l01
+   :synopsis: Wireless communication.
+
+Source code: :github-blob:`src/drivers/nrf24l01.h`, :github-blob:`src/drivers/nrf24l01.c`
+
+----------------------------------------------
+
+.. doxygenfile:: drivers/nrf24l01.h
+   :project: simba
