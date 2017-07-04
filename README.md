@@ -7,15 +7,15 @@
 + B105 Electronic Systems Lab
 + Escuela Técnica Superior de Ingenieros de Telecomunicación
 + Universidad Politécnica de Madrid
-+ Versión : 2.4
++ Versión : 2.5
 + Descripción :
 
-	Diseño e implementación de una red de nodos inalámbricos para comunicaciones multipunto de contenido multimedia.
+	Este proyecto busca la implementación de una red de nodos basados en el módulo wifi ESP8266 que pueda comunicar contenido multimedia entre ellos y ordenadores. De esta manera, se podrá escuchar la música de un PC en unos altavoces que no tengan conexión a internet, conectándoles nuestro dispositivo.
 
 ##	Estructura
 El sistema va a estar formado por dos partes:
 + Servidor node.js implementado en una Raspberry Pi 3 model B.
-+ Cliente que puede ser transmisor o receptor. En esta versión el cliente de ordenador se controlará por una interfaz gráfica.
++ Cliente que puede ser transmisor o receptor. En esta versión el cliente de ordenador se controlará por una interfaz gráfica. El cliente del ESP8266 solo podrá tomar el rol de receptor.
 
 ##	Servidor
 + Instalar nodejs, nodejs-legacy y npm.
@@ -31,14 +31,18 @@ El sistema va a estar formado por dos partes:
 + Si se desea recibir ayuda a la hora de ejecutar el script se puede usar el flag --help. Con ese flag se pueden ver las posibilidades de flags de depuración que tiene el script.
 
 ##	Cliente ESP8266
-Se utiliza el sistema operativo Simba. Para ello se hace uso del editor de texto Atom y del entorno de desarrollo PlatformIO, dirigido a sistemas empotrados. Debido a que se han hecho modificaciones en el código de las librerías de Simba, se ha copiado todo el código del sistema operativo y de las librerías en la carpeta lib/mutantLib/. Además se ha tenido que modificar la librería de Websocket para que se conectara al servidor, por ello si se desea utilizar hay que sustituir el contenido de la carpeta /home/usuario/.platformio/packages/framework-simba por el contenido de lib/mutantLib. Desde Atom con PlatformIO el acceso al puerto serie se realiza a 74880.
+Se utiliza el sistema operativo Simba. Para ello se hace uso del editor de texto Atom y del entorno de desarrollo PlatformIO, dirigido a sistemas empotrados. Debido a que se han hecho modificaciones en el código de las librerías de Simba, se ha copiado todo el código del sistema operativo y de las librerías en la carpeta lib/mutantLib/. Además se ha tenido que modificar la librería de Websocket para que se conectara al servidor, por ello si se desea utilizar hay que sustituir el contenido de la carpeta /home/usuario/.platformio/packages/framework-simba por el contenido de lib/mutantLib. Desde Atom con PlatformIO el acceso al puerto serie se realiza a 74880 baudios.
 
 ##	Versiones
++	Versión 2.5:
+
+	En esta versión se utiliza UDP multicast para realizar la comunicación del audio. De esta manera se reduce el consumo de ancho de banda. Cada transmisor comunica su contenido en un grupo multicast distinto, y los receptores se unen a él cuando se lo indica el servidor.
+
 + Versión 2.4:
 
 	El cliente del ESP8266 se ha pasado a implementar con el sistema operativo Simba. Debido a problemas con el driver del SPI, solo se ha conseguido que cuando reciba los datos, los descarte. Además se ha añadido una opción en la página web para eliminar del sistema clientes.
 
-	Se ha añadido documentación con Doxygen para el cliente del ESP8266 con Simba. Se puede consultar en la carpeta Cliente/Simba_Client/html
+	Se ha añadido documentación con Doxygen para el cliente del ESP8266 con Simba. Se puede consultar en la carpeta Cliente/Simba_Client/html.
 
 +	Versión 2.3:
 

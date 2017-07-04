@@ -1,9 +1,9 @@
 /**
 *
-*	@file 		websocket_server.js
+*	@file 		cerebro.js
 *	@author 	David Gonzalez Filoso <dgfiloso@b105.upm.es>
-*	@summary 	Servidor que escucha los sockets y los conecta entre ellos para enviarse archivos
-*	@version	v2.4
+*	@summary 	Servidor que escucha los sockets y los conecta entre ellos para enviarse audio
+*	@version	2.5
 *
 **/
 
@@ -36,7 +36,7 @@ web_server.listen(5000, function()
 **/
 //	Arrays que contendrán los sockets y las habitaciones
 var clients = [];
-var rooms = 0;
+var rooms = [0];
 
 //	Secuencia que envía cada segundo los bits que se están enviando
 var bits_ts = 0;		//	Número de bits de transmisores a servidor
@@ -53,6 +53,38 @@ function calc_bitRate()
 }
 setInterval(calc_bitRate,1000);
 
+function removeItemFromArr ( arr, item )
+{
+	var i = arr.indexOf( item );
+	if (i !== -1)
+	{
+		arr.splice(i,1);
+	}
+};
+
+function removeTx(conn)
+{
+	for(var i in clients)
+	{
+		if(clients[i].socket === conn)
+		{
+			if(clients[i].type === "T")
+			{
+				removeItemFromArr(rooms,clients[i].room);
+				var temp_room = clients[i].room;
+				for (var j in clients)
+				{
+					if (clients[j].room === temp_room)
+					{
+						clients[j].room = 0;
+					}
+				}
+			}
+			clients.splice(i,1);
+			io.sockets.emit('refreshTable');
+		}
+	}
+}
 
 //	Atendemos las conexiones
 server.on('connection', function(conn)
@@ -64,29 +96,7 @@ server.on('connection', function(conn)
 	conn.on('close', function(code, reason)
 	{
 		console.log("Desconectado mutante");
-		for(var i in clients)
-		{
-			if(clients[i].socket === conn)
-			{
-				if(clients[i].type === "T")
-				{
-					rooms--;
-					for (var j in clients)
-					{
-						if (clients[j].room === clients[i].room)
-						{
-							clients[j].room = 0;
-						}
-						else if (clients[j].room != 0)
-						{
-							clients[j].room--;
-						}
-					}
-				}
-				clients.splice(i,1);
-				io.sockets.emit('refreshTable');
-			}
-		}
+		removeTx(conn);
 	});
 
 	conn.on('error', function(err)
@@ -117,8 +127,19 @@ server.on('connection', function(conn)
 
 			if(clientInfo.type === "T")
 			{
-				rooms++;
-				clientInfo.room = rooms;
+				var tx_room = 1;
+				for (var i in rooms)
+				{
+					if (tx_room === rooms[i])
+					{
+						tx_room++;
+					}
+				}
+				rooms.push(tx_room);
+				rooms.sort();			//	Ordena el array rooms
+				clientInfo.room = tx_room;
+				clientInfo.ip = "224.1.1."+(clientInfo.room);
+				conn.sendText(JSON.stringify({event: "udpTx", data: clientInfo.ip}));
 			}
 
 			clients.push(clientInfo);
@@ -202,32 +223,6 @@ server.on('connection', function(conn)
 			}
 		}
 	});
-
-	conn.on('binary', function(inStream)
-	{
-		inStream.on('readable', function()
-		{
-			var txRoom = 0;
-			var data = inStream.read();
-			bits_ts += data.byteLength * 8;
-			for (var i in clients)
-			{
-				if(clients[i].socket === conn)
-				{
-					txRoom = clients[i].room;
-				}
-			}
-			for (var i in clients)
-			{
-				if((clients[i].socket !== conn)&&(clients[i].type === "R")&&(clients[i].room === txRoom))
-				{
-					// console.log("Client "+i+" : "+data.length);
-					bits_sr += data.byteLength * 8;
-					clients[i].socket.sendBinary(data);
-				}
-			}
-		});
-	});
 });
 
 /**
@@ -309,6 +304,8 @@ app.post('/room', function(req, res, next)
 					if (clients[j].name === req.body.txName)
 					{
 						clients[i].room = clients[j].room;
+						var udp_addr = clients[j].ip;
+						clients[i].socket.sendText(JSON.stringify({event: "udpRx", data: udp_addr}));
 					}
 				}
 			}
@@ -336,8 +333,8 @@ app.post('/delete', function(req, res, next)
 	{
 		if (clients[i].name === req.body.deleteName)
 		{
-			clients[i].socket.sendText(JSON.stringify({event: "endTx", data: "ENDED COMMUNICATION"}));
-			clients.splice(i,1);
+			clients[i].socket.sendText(JSON.stringify({event: "delete", data: "DISCONNECTED FROM SYSTEM"}));
+			removeTx(clients[i].socket);
 		}
 	}
 	var tx = [];
