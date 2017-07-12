@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Conexión UDP unicast en ESP8266: Referencia del Archivo main.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Conexión UDP unicast en ESP8266
+   &#160;<span id="projectnumber">v3.0</span>
+   </div>
+   <div id="projectbrief">Prueba de funcionamiento del sistema Cerebro utilizando sólo conexión UDP unicast.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a> &#124;
+<a href="#define-members">'defines'</a> &#124;
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo main.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Código - Cliente del sistema Cerebro. Recibe audio y lo envía para reproducirlo.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;espressif/esp_common.h&quot;</code><br />
+<code>#include &quot;esp/uart.h&quot;</code><br />
+<code>#include &quot;esp/gpio.h&quot;</code><br />
+<code>#include &quot;esp8266.h&quot;</code><br />
+<code>#include &lt;softuart/softuart.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;FreeRTOS.h&quot;</code><br />
+<code>#include &quot;task.h&quot;</code><br />
+<code>#include &quot;semphr.h&quot;</code><br />
+<code>#include &quot;lwip/err.h&quot;</code><br />
+<code>#include &quot;lwip/sockets.h&quot;</code><br />
+<code>#include &quot;lwip/sys.h&quot;</code><br />
+<code>#include &quot;lwip/netdb.h&quot;</code><br />
+<code>#include &quot;lwip/dns.h&quot;</code><br />
+<code>#include &quot;lwip/udp.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="udp__recv_8h_source.html">udp_recv.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para main.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8c__incl.png" border="0" usemap="#main_8c" alt=""/></div>
+<map name="main_8c" id="main_8c">
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcommunication__data.html">communication_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contiene estructuras o variables comunes a las tareas que utilizan para comunicarse entre ellas.  <a href="structcommunication__data.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+'defines'</h2></td></tr>
+<tr class="memitem:a586542b79d00e4db7e1d5a667ae83a2b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a586542b79d00e4db7e1d5a667ae83a2b">WIFI_SSID</a>&#160;&#160;&#160;&quot;XXXX&quot;</td></tr>
+<tr class="memdesc:a586542b79d00e4db7e1d5a667ae83a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nombre de la red wifi.  <a href="#a586542b79d00e4db7e1d5a667ae83a2b">Más...</a><br /></td></tr>
+<tr class="separator:a586542b79d00e4db7e1d5a667ae83a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c95561b03d0fcf9048b231ae2ba90fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3c95561b03d0fcf9048b231ae2ba90fb">WIFI_PASS</a>&#160;&#160;&#160;&quot;XXXX&quot;</td></tr>
+<tr class="memdesc:a3c95561b03d0fcf9048b231ae2ba90fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contraseña de la red wifi.  <a href="#a3c95561b03d0fcf9048b231ae2ba90fb">Más...</a><br /></td></tr>
+<tr class="separator:a3c95561b03d0fcf9048b231ae2ba90fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7089c01538b339ae745173c117f95b9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aa7089c01538b339ae745173c117f95b9">RX_PIN</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memdesc:aa7089c01538b339ae745173c117f95b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin de recepción del puerto UART software.  <a href="#aa7089c01538b339ae745173c117f95b9">Más...</a><br /></td></tr>
+<tr class="separator:aa7089c01538b339ae745173c117f95b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bb17f5daa2b1eaef58c8aa2d989e27e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3bb17f5daa2b1eaef58c8aa2d989e27e">TX_PIN</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:a3bb17f5daa2b1eaef58c8aa2d989e27e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin de transmisión del puerto UART software.  <a href="#a3bb17f5daa2b1eaef58c8aa2d989e27e">Más...</a><br /></td></tr>
+<tr class="separator:a3bb17f5daa2b1eaef58c8aa2d989e27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a5832a79fccacdf3033abe2f3fb5ce15c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a5832a79fccacdf3033abe2f3fb5ce15c">recv_task</a> (void *pvParameters)</td></tr>
+<tr class="memdesc:a5832a79fccacdf3033abe2f3fb5ce15c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que se encarga de recibir el audio.  <a href="#a5832a79fccacdf3033abe2f3fb5ce15c">Más...</a><br /></td></tr>
+<tr class="separator:a5832a79fccacdf3033abe2f3fb5ce15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2552ed5b94d223f7682cfa453a915324"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a2552ed5b94d223f7682cfa453a915324">decoder_task</a> (void *pvParameters)</td></tr>
+<tr class="memdesc:a2552ed5b94d223f7682cfa453a915324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que se encarga de reproducir el audio.  <a href="#a2552ed5b94d223f7682cfa453a915324">Más...</a><br /></td></tr>
+<tr class="separator:a2552ed5b94d223f7682cfa453a915324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d9cc877f378fb13ccafb37e8545d69"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a61d9cc877f378fb13ccafb37e8545d69">wifi_task</a> (void *pvParameters)</td></tr>
+<tr class="memdesc:a61d9cc877f378fb13ccafb37e8545d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que se encarga de conectarse a la red wifi.  <a href="#a61d9cc877f378fb13ccafb37e8545d69">Más...</a><br /></td></tr>
+<tr class="separator:a61d9cc877f378fb13ccafb37e8545d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8253cd89ed4b268472ed62f4f2074ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aa8253cd89ed4b268472ed62f4f2074ae">user_init</a> (void)</td></tr>
+<tr class="memdesc:aa8253cd89ed4b268472ed62f4f2074ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función principal del programa.  <a href="#aa8253cd89ed4b268472ed62f4f2074ae">Más...</a><br /></td></tr>
+<tr class="separator:aa8253cd89ed4b268472ed62f4f2074ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1b726f3e654380720eb06ecdce46ed9e"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a1b726f3e654380720eb06ecdce46ed9e">wifi_alive</a> = 0</td></tr>
+<tr class="memdesc:a1b726f3e654380720eb06ecdce46ed9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indica si la conexión wifi se encuentra activa (1)  <a href="#a1b726f3e654380720eb06ecdce46ed9e">Más...</a><br /></td></tr>
+<tr class="separator:a1b726f3e654380720eb06ecdce46ed9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Código - Cliente del sistema Cerebro. Recibe audio y lo envía para reproducirlo. </p>
+<p>Programa para el módulo ESP8266 utilizando el sistema operativo de tiempo real FreeRTOS. Mediante el uso de un servidor UDP recibe audio y lo envía a otro módulo para que lo reproduzca.</p>
+<dl class="section version"><dt>Versión</dt><dd>3.0 </dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>David González Filoso <a href="#" onclick="location.href='mai'+'lto:'+'dgf'+'il'+'oso'+'@b'+'105'+'.u'+'pm.'+'es'; return false;">dgfil<span style="display: none;">.nosp@m.</span>oso@<span style="display: none;">.nosp@m.</span>b105.<span style="display: none;">.nosp@m.</span>upm.<span style="display: none;">.nosp@m.</span>es</a>  B105 - Electronic Systems Lab </dd></dl>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a class="anchor" id="a586542b79d00e4db7e1d5a667ae83a2b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WIFI_SSID&#160;&#160;&#160;&quot;XXXX&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nombre de la red wifi. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3c95561b03d0fcf9048b231ae2ba90fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WIFI_PASS&#160;&#160;&#160;&quot;XXXX&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Contraseña de la red wifi. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa7089c01538b339ae745173c117f95b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RX_PIN&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pin de recepción del puerto UART software. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3bb17f5daa2b1eaef58c8aa2d989e27e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TX_PIN&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pin de transmisión del puerto UART software. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a class="anchor" id="a5832a79fccacdf3033abe2f3fb5ce15c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void recv_task </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pvParameters</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que se encarga de recibir el audio. </p>
+<p>Mediante un servidor UDP, recibe el audio y lo manda a la tarea de reproducción usando una cola.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameters</td><td>Parámetro que se le pasa al crear la tarea </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2552ed5b94d223f7682cfa453a915324"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void decoder_task </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pvParameters</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que se encarga de reproducir el audio. </p>
+<p>Recibe el audio a través de una cola y lo envía a otro módulo para que lo descodifique y lo reproduzca.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameters</td><td>Parámetro que se le pasa al crear la tarea </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a61d9cc877f378fb13ccafb37e8545d69"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void wifi_task </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pvParameters</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea que se encarga de conectarse a la red wifi. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pvParameters</td><td>Parámetro que se le pasa al crear la tarea </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa8253cd89ed4b268472ed62f4f2074ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void user_init </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función principal del programa. </p>
+<p>Crea las tareas, las colas y los semáforos.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">void</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las variables</h2>
+<a class="anchor" id="a1b726f3e654380720eb06ecdce46ed9e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int wifi_alive = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indica si la conexión wifi se encuentra activa (1) </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

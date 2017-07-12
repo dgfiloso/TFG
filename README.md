@@ -23,7 +23,9 @@ El sistema sólo estará formado por clientes. Estos clientes podrán ser transm
 + Si se desea recibir ayuda a la hora de ejecutar el script se puede usar el flag --help. Con ese flag se pueden ver las posibilidades de flags de depuración que tiene el script.
 
 ##	Cliente ESP8266
-Se utiliza el sistema operativo FreeRTOS, utilizando el firmware esp-open-rtos (https://github.com/SuperHouse/esp-open-rtos). Todas las instrucciones para utilizarlo se encuentran en su repositorio. Este cliente no se ha conseguido que reciba datos por un grupo multicast, por lo que he realizado una prueba de funcionamiento utilizando una conexión UDP normal. Para esta prueba, en vez de utilizar el script p2p_client.py como cliente, se tiene que utilizar el script unicast_tx.py como transmisor.
+Se utiliza el sistema operativo FreeRTOS, utilizando el firmware esp-open-rtos (https://github.com/SuperHouse/esp-open-rtos). Este cliente no se ha conseguido que reciba datos por un grupo multicast, por lo que he realizado una prueba de funcionamiento utilizando una conexión UDP normal. Para esta prueba, en vez de utilizar el script p2p_client.py como cliente, se tiene que utilizar el script unicast_tx.py como transmisor.
+
+Para instalar el compilador y configurarlo, simplemente hay que ejecutar el script xtensa_install.sh de la carpeta FreeRTOS/. Si se desea realizar la instalación de forma manual, siga las instrucciones que se indican en la página web del repositorio de esp-open-rtos. Para continuar su desarrollo se puede abrir con Eclipse. La carpeta FreeRTOS/unicast/ es un proyecto de Eclipse que compila perfectamente si se ha usado el script antes mencionado para instalar el compilador.
 
 ##	Versiones
 + Versión 3.0:

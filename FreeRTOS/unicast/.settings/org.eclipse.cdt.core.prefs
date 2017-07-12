@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/PATH/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/PATH/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/PATH/value=${HOME}/.esp-open-sdk/xtensa-lx106-elf/bin\:/bin\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/usr/games\:/usr/local/games\:/snap/bin\:/usr/local/gcc-arm/bin
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/PWD/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/PWD/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/PWD/value=/home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/src
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.459577594/appendContributed=true

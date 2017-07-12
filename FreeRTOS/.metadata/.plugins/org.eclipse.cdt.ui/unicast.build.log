@@ -1,0 +1,116 @@
+20:52:41 **** Build of configuration Default for project unicast ****
+make -j4 all 
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libmain/user_interface.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libmain/spi_flash.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libmain/os_cpu_a.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libmain/uart.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libmain/misc.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libmain/timers.c
+AS /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libmain/xtensa_context.S
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libnet80211/ieee80211_hostap.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libnet80211/wl_cnx.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libnet80211/ieee80211_ets.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libnet80211/ieee80211_input.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libnet80211/ieee80211_sta.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libphy/phy_chip_v6.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libphy/phy.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libphy/phy_sleep.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libpp/pm.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libpp/if_hwctrl.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libpp/pp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libpp/esf_buf.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libpp/lmac.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libpp/wdev.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libwpa/os_xtensa.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/open_esplibs/libwpa/wpa_main.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/src/main.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/src/udp_recv.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/extras/softuart/softuart.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/FreeRTOS/Source/queue.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/FreeRTOS/Source/croutine.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/FreeRTOS/Source/list.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/FreeRTOS/Source/event_groups.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/FreeRTOS/Source/tasks.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/FreeRTOS/Source/timers.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/FreeRTOS/Source/portable/esp8266/port.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/sys_arch.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/esp_interface.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/netdb.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/api_lib.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/netifapi.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/tcpip.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/netbuf.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/err.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/api_msg.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/api/sockets.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/stats.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/mem.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/init.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/memp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/tcp_in.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/dhcp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/dns.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/raw.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/tcp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/def.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/netif.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/sys.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/timers.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/pbuf.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/udp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/tcp_out.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/ip_frag.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/inet.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/ip_addr.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/igmp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/ip.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/autoip.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/inet_chksum.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/core/ipv4/icmp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/netif/slipif.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/netif/etharp.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/lwip/lwip/src/netif/ethernetif.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/esp_interrupts.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/app_main.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/spiflash.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/esp_spi.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/sdk_compat.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/sysparam.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/esp_gpio.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/phy_info.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/esp_phy.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/esp_hwrand.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/newlib_syscalls.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/esp_timer.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/esp_iomux.c
+CC /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/debug_dumps.c
+AS /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/exception_vectors.S
+AS /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/spiflash-cache-enable.S
+AR build/open_esplibs.a
+C++ /home/dgfiloso/TFG_dgf/repo_publico/FreeRTOS/unicast/core/cplusplus_operators.cpp
+AR build/open_esplibs_libmain.a
+AR build/open_esplibs_libnet80211.a
+AR build/open_esplibs_libphy.a
+AR build/open_esplibs_libpp.a
+AR build/open_esplibs_libwpa.a
+AR build/program.a
+AR build/softuart.a
+AR build/freertos.a
+AR build/lwip.a
+SDK processing stage 1: Removing unwanted objects from ../lib/libnet80211.a
+SDK processing stage 1: Removing unwanted objects from ../lib/libphy.a
+SDK processing stage 1: Removing unwanted objects from ../lib/libpp.a
+SDK processing stage 1: Removing unwanted objects from ../lib/libmain.a
+SDK processing stage 1: Removing unwanted objects from ../lib/libwpa.a
+AR build/core.a
+SDK processing stage 2: Renaming symbols in SDK library build/sdklib/libmain_stage1.a -> build/sdklib/libmain.a
+SDK processing stage 2: Renaming symbols in SDK library build/sdklib/libphy_stage1.a -> build/sdklib/libphy.a
+SDK processing stage 2: Renaming symbols in SDK library build/sdklib/libnet80211_stage1.a -> build/sdklib/libnet80211.a
+SDK processing stage 2: Renaming symbols in SDK library build/sdklib/libpp_stage1.a -> build/sdklib/libpp.a
+SDK processing stage 2: Renaming symbols in SDK library build/sdklib/libwpa_stage1.a -> build/sdklib/libwpa.a
+LD build/unicast.out
+FW firmware/unicast.bin
+esptool.py v1.2
+
+20:52:44 Build Finished (took 2s.828ms)
+

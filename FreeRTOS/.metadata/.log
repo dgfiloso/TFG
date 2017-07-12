@@ -1,0 +1,10 @@
+!SESSION 2017-07-12 19:38:54.056 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-07-12 19:41:19.537
+!MESSAGE Indexed 'unicast' (694 sources, 991 headers) in 18,1 sec: 68.955 declarations; 258.445 references; 90 unresolved inclusions; 323 syntax errors; 1.044 unresolved names (0,32 %)
