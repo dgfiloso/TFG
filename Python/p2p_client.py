@@ -534,6 +534,7 @@ class TxPage(Frame):
 						control = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 						control.connect((recv, 3000))
 						control.send(msg)
+						print "Enviado: %s a %s:3000" % (msg, recv)
 						control.close()
 
 				else:

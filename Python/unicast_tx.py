@@ -13,6 +13,7 @@ import sys  # Librería para usar el sistema
 import socket  # Librería para usar sockets
 import struct  # Librería para usar estructuras como en C
 import string
+import binascii
 
 #	Librerías de GStreamer
 try:
@@ -33,22 +34,26 @@ tx_pipeline 	= None  			# Pipeline de transmisión
 udp_conn = None  #  Socket UDP
 udp_addr = "10.7.22.13"  # Dirección para comunicación UDP
 udp_port = 4000
+f = open("audio.mp3", 'w')
 
 def on_new_buffer(appsink):
-    """Enviamos los datos del pipeline de transmisión por los sockets.
+	"""Enviamos los datos del pipeline de transmisión por los sockets.
 
-    Esta función salta cuando el pipeline de transmisión emite una señal
-    de tipo 'new-sample'. Se encarga de enviar esos datos a través de los sockets.
+	Esta función salta cuando el pipeline de transmisión emite una señal
+	de tipo 'new-sample'. Se encarga de enviar esos datos a través de los sockets.
 
-    appsink.emit('pull-sample') 					-> Devuelve un objeto de tipo Gst.Sample
-    appsink.emit('pull-sample').get_buffer() 		-> Devuelve el Gst.Buffer de la muestra
-    Gst.Buffer.extract_dup(0, tx_buffer.get_size()) -> Devuelve una copia de los datos desde el punto 0 hasta el punto indicado, en nuestro caso el tamaño total
+	appsink.emit('pull-sample') 					-> Devuelve un objeto de tipo Gst.Sample
+	appsink.emit('pull-sample').get_buffer() 		-> Devuelve el Gst.Buffer de la muestra
+	Gst.Buffer.extract_dup(0, tx_buffer.get_size()) -> Devuelve una copia de los datos desde el punto 0 hasta el punto indicado, en nuestro caso el tamaño total
 
-    """
-    tx_buffer = appsink.emit('pull-sample').get_buffer()
-    tx_data = tx_buffer.extract_dup(0, tx_buffer.get_size())
-    udp_conn.sendto(tx_data, (udp_addr, udp_port))
-    return False
+	"""
+	tx_buffer = appsink.emit('pull-sample').get_buffer()
+	tx_data = tx_buffer.extract_dup(0, tx_buffer.get_size())
+	# hex_str = binascii.b2a_hex(tx_data)
+	# print hex_str
+	f.write(tx_data)
+	udp_conn.sendto(tx_data, (udp_addr, udp_port))
+	return False
 
 def on_new_preroll(appsink):
     """Indica que vamos a empezar a transmisitir.
@@ -112,6 +117,8 @@ def send_audio():
 	encoder = gst.ElementFactory.make("lamemp3enc", "encoder")
 	audio_sink = gst.ElementFactory.make("appsink", "audio_sink")
 
+	encoder.set_property('target', 'bitrate')
+	encoder.set_property('bitrate', 32)
 	audio_sink.set_property('emit-signals', True)  # Permite emitir las señales 'new-sample' y 'new-preroll'
 	audio_sink.set_property('sync', False)  # Hace la decodificacion lo mas rapida posible
 	audio_sink.connect('new-sample', on_new_buffer)
@@ -164,4 +171,5 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
 		udp_conn.close()
+		f.close()
 		sys.exit()
