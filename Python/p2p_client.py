@@ -14,6 +14,7 @@ import sys  		# Librería para usar el sistema
 import socket  		# Librería para usar sockets
 import struct  		# Librería para usar estructuras como en C
 import string		# Librería para usar operaciones con strings
+import netifaces	# Librería para usar las interfaces de red
 
 #	Librerías de GStreamer
 try:
@@ -1097,9 +1098,12 @@ if __name__ == "__main__":
 			print "#ERROR: Argumento no valido"
 			sys.exit()
 
-	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	s.connect(("gmail.com", 80))
-	mutant_ip, port = s.getsockname()
+	# s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	# s.connect(("gmail.com", 80))
+	# mutant_ip, port = s.getsockname()
+	netif = raw_input("Indica la interfaz de red que va a usar: ")
+	netifaces.ifaddresses(netif)
+	mutant_ip = netifaces.ifaddresses(netif)[netifaces.AF_INET][0]['addr']
 
 	app = mutantGUI()
 	app.title("Mutante de Cerebro")
